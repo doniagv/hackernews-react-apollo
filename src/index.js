@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './components/App';
+import { setContext } from '@apollo/client/link/context';
+import { AUTH_TOKEN } from './constants';
 
 // 1
 import {
@@ -17,9 +19,20 @@ const httpLink = createHttpLink({
   uri: 'http://34.125.103.71/graphql/'
 });
 
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem(AUTH_TOKEN);
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `JWT ${token}` : ''
+    }
+  };
+});
+
 // 3
 const client = new ApolloClient({
-  link: httpLink,
+  //link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
 
