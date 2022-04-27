@@ -3,16 +3,15 @@ import { useMutation, gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
 const CREATE_LINK_MUTATION = gql`
-  mutation PostMutation(
+  mutation PostCreateLink(
     $description: String!
     $url: String!
   ) {
-    post(description: $description, url: $url) {
-      id
-      createdAt
-      url
-      description
-    }
+   createLink(description:$description, url:$url) {
+     id
+     url
+     description
+  }
   }
 `;
 

@@ -4,15 +4,11 @@ import { useQuery, gql } from '@apollo/client';
 
 const FEED_QUERY = gql`
   {
-    feed {
+    links {
       id
-      links {
-        id
-        createdAt
-        url
-        description
-      }
-    }
+      url
+      description
+   }
   }
 `
 ;
@@ -26,7 +22,7 @@ const LinkList = () => {
     <div>
       {data && (
         <>
-          {data.feed.links.map((link) => (
+          {data.links.map((link) => (
             <Link key={link.id} link={link} />
           ))}
         </>
