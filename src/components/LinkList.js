@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from './Link';
-import { useQuery, gql } from '@apollo/client';
+import React from "react";
+import Link from "./Link";
+import { useQuery, gql } from "@apollo/client";
 
 const FEED_QUERY = gql`
   {
@@ -8,14 +8,10 @@ const FEED_QUERY = gql`
       id
       url
       description
-   }
+    }
   }
-`
-;
-
-
+`;
 const LinkList = () => {
-
   const { data } = useQuery(FEED_QUERY);
 
   return (
@@ -29,8 +25,6 @@ const LinkList = () => {
       )}
     </div>
   );
-
-
 };
 
 export default LinkList;
